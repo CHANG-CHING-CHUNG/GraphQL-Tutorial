@@ -1,6 +1,7 @@
-import { useQuery } from '@apollo/client';
-import { getAuthorsQuery } from '../queries/queries';
-import { useState } from 'react'
+import { useQuery ,useMutation  } from '@apollo/client';
+import { getAuthorsQuery, addBookMutation } from '../queries/queries';
+import { useState } from 'react';
+
 
 const displayAuthors = (loading, error, data) => {
   if ( loading ) return (<option disabled>Loading Authors...</option>);
@@ -13,6 +14,7 @@ const displayAuthors = (loading, error, data) => {
 
 function AddBook() {
   const { loading, error, data } = useQuery(getAuthorsQuery);
+  const [ addBook, { book } ] = useMutation(addBookMutation);
 
   const [bookName, setBookName] = useState("");
   const [bookGenre, setbookGenre] = useState("");
